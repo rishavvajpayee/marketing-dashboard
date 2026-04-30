@@ -1,10 +1,20 @@
-import { Geist, Geist_Mono } from "next/font/google"
+import { DM_Sans, Geist_Mono, Syne } from "next/font/google"
 
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'})
+const syne = Syne({
+  subsets: ["latin"],
+  variable: "--font-dash-heading",
+  weight: ["400", "500", "600", "700", "800"],
+})
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  variable: "--font-dash-body",
+  weight: ["400", "500", "600"],
+})
 
 const fontMono = Geist_Mono({
   subsets: ["latin"],
@@ -20,10 +30,17 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={cn("antialiased", fontMono.variable, "font-sans", geist.variable)}
+      className={cn(
+        "dash-root dark antialiased",
+        fontMono.variable,
+        dmSans.variable,
+        syne.variable,
+      )}
     >
-      <body>
-        <ThemeProvider>{children}</ThemeProvider>
+      <body className="bg-[var(--dash-bg)] font-[family-name:var(--font-dash-body)] text-[var(--dash-text)]">
+        <ThemeProvider defaultTheme="dark" forcedTheme="dark">
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   )
